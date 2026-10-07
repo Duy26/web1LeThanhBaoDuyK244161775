@@ -1,0 +1,154 @@
+<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Jackson Electronics - Registration Form</title>
+        <style>@import url(Css48/main.css);</style>
+        <style>@import url(../Css/main.css);</style>
+    </head>
+    <body>
+        <div id="container">  
+        <ul>
+        <li> <a href="../index.html">Home</a></li>
+        <li> <a href="#">HTML</a></li>
+        <li> <a href="#">CSS</a>
+            <ul>
+            <li> <a href="../ex42/ex42.html">Bai 42</a></li>
+            <li> <a href="#">GIAO DIỆN VỚI CSS</a></li>
+            <li> <a href="#">CSS NÂNG CAO</a></li>
+        </ul>
+        </li>
+        <li> <a href="#">JAVASCRIPT</a>
+        <ul>
+            <li> <a href="#">LESSON 01</a></li>
+            <li> <a href="#">LESSON 02</a></li>
+            <li> <a href="#">LESSON 03</a></li>
+        </ul>
+        </li>
+        <li> <a href="#">HTML DOM</a></li>
+        <li> <a href="#">NGÔN NGỮ ASP</a></li>
+        <li><a href="#">LearnForm</a>
+            <ul>
+            <li><a href="../Learnform/ClientGet.html">Get form</a></li>
+            <li> <a href="../ex48/d48.html">Ex48</a></li>
+            <li> <a href="../ex49/d49.html">Ex49</a></li>
+            <li> <a href="../ex50/d50.html">Ex50</a></li>
+            </ul>
+        </li>
+
+
+        </ul>
+
+        </div>
+
+        <div class="form-container">
+            
+            <div class="header-image">
+                <img src="images/Jackson.gif" alt="Jackson Electronics Logo" />
+            </div>
+
+            <h2>Registration Form</h2>
+            <p class="subtitle">Register your Jackson Electronics product here</p>
+
+            <form action="#" method="POST">
+                <table class="form-layout">
+                    <tr>
+                        <td class="col-label">First Name:</td>
+                        <td>
+                            <input type="text" name="first_name" size="25"> 
+                            &nbsp;Last Name: <input type="text" name="last_name" size="25">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Address #1:</td>
+                        <td><input type="text" name="address1" size="55"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Address #2:</td>
+                        <td><input type="text" name="address2" size="55"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">City:</td>
+                        <td>
+                            <input type="text" name="city" size="25">
+                            &nbsp;State: <input type="text" name="state" size="5">
+                            &nbsp;Zip: <input type="text" name="zip" size="10">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Country:</td>
+                        <td><input type="text" name="country" value="United States" size="25"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><hr></td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Product:</td>
+                        <td>
+                            <select name="product">
+                                <option value="ScanMaster" selected>ScanMaster</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Date Purchased:</td>
+                        <td><input type="text" name="date_purchased" size="25"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Serial #:</td>
+                        <td><input type="text" name="serial_number" size="25"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Used for:</td>
+                        <td>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <td style="width:40%;"><input type="radio" name="used_for" value="Home"> Home</td>
+                                    <td><input type="radio" name="used_for" value="Educational Institution"> Educational Institution</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="used_for" value="Business" checked> Business</td>
+                                    <td><input type="radio" name="used_for" value="Other"> Other</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="radio" name="used_for" value="Government"> Government</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">System (check all that apply):</td>
+                        <td>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <td style="width:40%;"><input type="checkbox" name="system_os" value="Windows"> Windows</td>
+                                    <td><input type="checkbox" name="system_os" value="UNIX"> UNIX</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="system_os" value="Macintosh"> Macintosh</td>
+                                    <td><input type="checkbox" name="system_os" value="Other"> Other</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><hr></td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Comments?:</td>
+                        <td>
+                            <textarea name="comments" rows="5" cols="60"></textarea>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="action-buttons">
+                    <input type="submit" value="Click to register">
+                    <input type="reset" value="Click to cancel">
+                </div>
+            </form>
+        </div>
+
+    </body>
+</html>

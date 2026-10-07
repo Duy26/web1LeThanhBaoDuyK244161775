@@ -1,0 +1,71 @@
+        body {
+            font-family: "Times New Roman", Times, serif;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #d9fbff;
+            border: 2px solid #0000cc;
+            padding: 20px 30px;
+            width: 700px;
+            margin: 0 auto;
+        }
+        .header-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2.title {
+            color: #f23d24;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #777;
+            margin-bottom: 25px;
+        }
+        .question-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        table.options-table {
+            width: 90%;
+            margin-left: 15px;
+            border-collapse: collapse;
+        }
+        table.options-table td {
+            padding: 3px 0;
+            vertical-align: middle;
+        }
+        .text-input-date {
+            width: 90px;
+        }
+        .text-input-full {
+            width: 100%;
+            padding: 5px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+            margin-left: 20px;
+        }
+        .action-btn {
+            text-align: center;
+            cursor: pointer;
+        }
+        .action-btn img {
+            display: block;
+            margin: 0 auto 5px auto;
+        }
+        .action-btn span {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .btn-search { color: #2e8b57; }
+        .btn-help { color: #0000cc; }
+        .btn-cancel { color: #ff0055; }
