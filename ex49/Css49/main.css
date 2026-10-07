@@ -3,8 +3,8 @@
             padding: 20px;
         }
         .form-container {
-            background-color: #d9fbff; /* Màu nền xanh nhạt */
-            border: 2px solid #0000cc; /* Viền xanh đậm bao quanh form */
+            background-color: #d9fbff;
+            border: 2px solid #0000cc;
             padding: 20px 30px;
             width: 700px;
             margin: 0 auto;
@@ -14,7 +14,7 @@
             margin-bottom: 20px;
         }
         h2.title {
-            color: #f23d24; /* Màu đỏ cho tiêu đề */
+            color: #f23d24;
             font-size: 24px;
             margin-top: 0;
             margin-bottom: 15px;
