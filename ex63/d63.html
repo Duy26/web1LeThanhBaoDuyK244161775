@@ -1,0 +1,300 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 63 - Đăng ký thành viên</title>
+    <style>@import url(Css_d63/main.css);</style>
+    <style>@import url(../Css/main.css);</style>
+    <script>
+        // Nạp dữ liệu cho droplist Ngày, Tháng, Năm khi trang load
+        function loadDateDropdowns() {
+            var daySelect = document.getElementById("day");
+            var monthSelect = document.getElementById("month");
+            var yearSelect = document.getElementById("year");
+
+            // Nạp ngày 1-31 bằng vòng lặp for
+            for (var i = 1; i <= 31; i++) {
+                var option = document.createElement("option");
+                option.value = (i < 10 ? "0" + i : i);
+                option.text = (i < 10 ? "0" + i : i);
+                daySelect.appendChild(option);
+            }
+
+            // Nạp tháng 1-12 bằng vòng lặp while
+            var m = 1;
+            while (m <= 12) {
+                var option = document.createElement("option");
+                option.value = m;
+                option.text = m;
+                monthSelect.appendChild(option);
+                m++;
+            }
+
+            // Nạp năm từ 1970 đến năm hiện tại bằng vòng lặp do-while
+            var currentYear = new Date().getFullYear();
+            var y = 1970;
+            do {
+                var option = document.createElement("option");
+                option.value = y;
+                option.text = y;
+                yearSelect.appendChild(option);
+                y++;
+            } while (y <= currentYear);
+
+            // Mặc định chọn giá trị đầu
+            daySelect.selectedIndex = 0;
+            monthSelect.selectedIndex = 0;
+            yearSelect.selectedIndex = 0;
+        }
+
+        // Kiểm tra email hợp lệ
+        function isValidEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Lấy danh sách sở thích đã chọn
+        function getSelectedHobbies() {
+            var hobbies = [];
+            var checks = document.getElementsByName("hobby");
+            for (var i = 0; i < checks.length; i++) {
+                if (checks[i].checked) {
+                    hobbies.push(checks[i].value);
+                }
+            }
+            return hobbies.join(", ");
+        }
+
+        // Lấy màu yêu thích
+        function getSelectedColor() {
+            var colors = document.getElementsByName("favoriteColor");
+            for (var i = 0; i < colors.length; i++) {
+                if (colors[i].checked) {
+                    return colors[i].value;
+                }
+            }
+            return "";
+        }
+
+        // Lấy giới tính
+        function getGender() {
+            var genders = document.getElementsByName("gender");
+            for (var i = 0; i < genders.length; i++) {
+                if (genders[i].checked) {
+                    return genders[i].value;
+                }
+            }
+            return "";
+        }
+
+        // Sự kiện mouse over cho dòng table
+        function rowMouseOver(tr) {
+            tr.style.backgroundColor = "yellow";
+        }
+
+        // Sự kiện mouse out cho dòng table
+        function rowMouseOut(tr) {
+            tr.style.backgroundColor = "white";
+        }
+
+        // Đăng ký: validate và thêm vào table
+        function dangKy() {
+            var ten = document.getElementById("ten").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var day = document.getElementById("day").value;
+            var month = document.getElementById("month").value;
+            var year = document.getElementById("year").value;
+            var gender = getGender();
+            var hobbies = getSelectedHobbies();
+            var color = getSelectedColor();
+
+            // Kiểm tra Tên không được bỏ trống
+            if (ten === "") {
+                alert("Tên không được bỏ trống!");
+                document.getElementById("ten").focus();
+                return;
+            }
+
+            // Kiểm tra Email phải hợp lệ
+            if (email === "" || !isValidEmail(email)) {
+                alert("Email không hợp lệ!");
+                document.getElementById("email").focus();
+                return;
+            }
+
+            if (gender === "") {
+                alert("Vui lòng chọn giới tính!");
+                return;
+            }
+
+            // Tạo dòng mới
+            var tbody = document.getElementById("resultBody");
+            var tr = document.createElement("tr");
+
+            // Gắn sự kiện mouse over / mouse out
+            tr.onmouseover = function () { rowMouseOver(this); };
+            tr.onmouseout = function () { rowMouseOut(this); };
+
+            var tdTen = document.createElement("td");
+            tdTen.innerText = ten;
+            tr.appendChild(tdTen);
+
+            var tdEmail = document.createElement("td");
+            tdEmail.innerText = email;
+            tr.appendChild(tdEmail);
+
+            var tdGender = document.createElement("td");
+            tdGender.innerText = gender;
+            tr.appendChild(tdGender);
+
+            var tdDob = document.createElement("td");
+            tdDob.innerText = day + "/" + month + "/" + year;
+            tr.appendChild(tdDob);
+
+            var tdHobby = document.createElement("td");
+            tdHobby.innerText = hobbies || "(không có)";
+            tr.appendChild(tdHobby);
+
+            var tdColor = document.createElement("td");
+            tdColor.innerText = color || "(không chọn)";
+            tr.appendChild(tdColor);
+
+            tbody.appendChild(tr);
+
+            alert("Đăng ký thành công!");
+        }
+
+        // Nút Tiếp: xóa form, focus về ô Tên
+        function tiep() {
+            document.getElementById("ten").value = "";
+            document.getElementById("email").value = "";
+
+            // Reset radio giới tính
+            var genders = document.getElementsByName("gender");
+            for (var i = 0; i < genders.length; i++) {
+                genders[i].checked = false;
+            }
+
+            // Reset checkbox sở thích
+            var hobbies = document.getElementsByName("hobby");
+            for (var i = 0; i < hobbies.length; i++) {
+                hobbies[i].checked = false;
+            }
+
+            // Reset radio màu
+            var colors = document.getElementsByName("favoriteColor");
+            for (var i = 0; i < colors.length; i++) {
+                colors[i].checked = false;
+            }
+
+            // Reset date dropdowns về mặc định
+            document.getElementById("day").selectedIndex = 0;
+            document.getElementById("month").selectedIndex = 0;
+            document.getElementById("year").selectedIndex = 0;
+
+            document.getElementById("ten").focus();
+        }
+
+        // Chạy khi trang load
+        window.onload = function () {
+            loadDateDropdowns();
+            document.getElementById("ten").focus();
+        };
+    </script>
+</head>
+<body>
+    <main class="registration-panel">
+        <h2>Đăng ký thành viên</h2>
+
+        <table class="form-table">
+        <tr>
+            <td><label for="ten">Tên<span class="required">(*)</span></label></td>
+            <td><input type="text" id="ten" name="ten" size="30"></td>
+        </tr>
+        <tr class="date-row">
+            <td colspan="2">
+                <label class="date-label">Ngày sinh<span class="required">(*)</span></label>
+                Ngày:
+                <select id="day" name="day"></select>
+                Tháng:
+                <select id="month" name="month"></select>
+                Năm:
+                <select id="year" name="year"></select>
+            </td>
+        </tr>
+        <tr class="gender-row">
+            <td><label>Giới tính<span class="required">(*)</span></label></td>
+            <td>
+                <input type="radio" name="gender" value="Nam" id="male" checked> <label for="male">Nam</label>
+                <input type="radio" name="gender" value="Nữ" id="female"> <label for="female">Nữ</label>
+            </td>
+        </tr>
+        <tr class="email-row">
+            <td><label for="email">Email<span class="required">(*)</span></label></td>
+            <td><input type="text" id="email" name="email" size="30"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><label>Sở thích của bạn:</label></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="choice-list">
+                <input type="checkbox" name="hobby" value="Mua sắm" id="h1" checked> <label for="h1">Mua sắm</label><br>
+                <input type="checkbox" name="hobby" value="Du lịch" id="h2" checked> <label for="h2">Du lịch</label><br>
+                <input type="checkbox" name="hobby" value="Tán gẫu" id="h3" checked> <label for="h3">Tán gẫu</label><br>
+                <input type="checkbox" name="hobby" value="Đọc sách" id="h4" checked> <label for="h4">Đọc sách</label><br>
+                <input type="checkbox" name="hobby" value="Nghe nhạc" id="h5" checked> <label for="h5">Nghe nhạc</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><label>Màu yêu thích của bạn:</label></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="choice-list">
+                <input type="radio" name="favoriteColor" value="Màu xanh da trời" id="c1" checked> <label for="c1">Màu xanh da trời</label><br>
+                <input type="radio" name="favoriteColor" value="Màu đỏ" id="c2"> <label for="c2">Màu đỏ</label><br>
+                <input type="radio" name="favoriteColor" value="Màu vàng" id="c3"> <label for="c3">Màu vàng</label><br>
+                <input type="radio" name="favoriteColor" value="Màu xanh lá cây" id="c4"> <label for="c4">Màu xanh lá cây</label><br>
+                <input type="radio" name="favoriteColor" value="Màu xanh tím" id="c5"> <label for="c5">Màu xanh tím</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="button-cell">
+                <button type="button" class="btn btn-register" onclick="dangKy()">Đăng ký</button>
+                <button type="button" class="btn btn-next" onclick="tiep()">Tiếp</button>
+            </td>
+        </tr>
+        </table>
+
+        <table id="resultTable">
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Giới tính</th>
+                <th>Năm sinh</th>
+                <th>Sở thích</th>
+                <th>Màu yêu thích</th>
+            </tr>
+        </thead>
+        <tbody id="resultBody">
+            <!-- Dữ liệu mẫu minh họa -->
+            <tr onmouseover="rowMouseOver(this)" onmouseout="rowMouseOut(this)">
+                <td>Nguyễn Văn Bình</td>
+                <td>binh@gmail.com</td>
+                <td>Nam</td>
+                <td>02/02/1990</td>
+                <td>Đọc sách</td>
+                <td>Màu vàng</td>
+            </tr>
+            <tr onmouseover="rowMouseOver(this)" onmouseout="rowMouseOut(this)">
+                <td>Nguyễn Thị An</td>
+                <td>nguyenthian@gmail.com</td>
+                <td>Nữ</td>
+                <td>01/01/1992</td>
+                <td>Tán gẫu, Đọc sách</td>
+                <td>Màu đỏ</td>
+            </tr>
+        </tbody>
+        </table>
+    </main>
+</body>
+</html>

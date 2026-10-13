@@ -1,0 +1,174 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 64 - Dynamic Table</title>
+    <style>@import url(Css_d64/main.css);</style>
+    <style>@import url(../Css/main.css);</style>
+    <script>
+        // Hiển thị đồng hồ điện tử (giờ hệ thống client)
+        function updateClock() {
+            var now = new Date();
+            var h = now.getHours();
+            var m = now.getMinutes();
+            var s = now.getSeconds();
+
+            // Thêm số 0 nếu < 10
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            document.getElementById("clock").innerText = h + ":" + m + ":" + s;
+        }
+
+        // Xử lý click chuột trái / phải trên dòng thông báo
+        function handleMouseClick(event) {
+            // event.button: 0 = trái, 2 = phải
+            if (event.button === 0) {
+                alert("Bạn vừa click chuột TRÁI");
+            } else if (event.button === 2) {
+                alert("Bạn vừa click chuột PHẢI");
+            }
+            // Ngăn menu context mặc định khi click phải
+            event.preventDefault();
+            return false;
+        }
+
+        // Toggle tô nền đỏ khi click vào dòng trong table
+        function toggleRowColor(tr) {
+            if (tr.classList.contains("selected")) {
+                tr.classList.remove("selected");
+            } else {
+                tr.classList.add("selected");
+            }
+        }
+
+        var nextRowNumber = 4;
+
+        // Thêm một dòng mới vào cuối bảng
+        function themVao() {
+            var table = document.getElementById("dynamicTable");
+            var newRow = table.insertRow(-1);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+
+            cell1.innerText = "Dòng " + nextRowNumber + " cột 1";
+            cell2.innerText = "Dòng " + nextRowNumber + " cột 2";
+            nextRowNumber++;
+
+            newRow.onclick = function () {
+                toggleRowColor(this);
+            };
+        }
+
+        // Xóa tất cả các dòng đang được chọn
+        function xoa() {
+            var table = document.getElementById("dynamicTable");
+            var selectedRows = table.querySelectorAll("tr.selected");
+
+            if (selectedRows.length === 0) {
+                alert("Hãy click vào dòng cần xóa trước.");
+                return;
+            }
+
+            for (var i = table.rows.length - 1; i >= 0; i--) {
+                if (table.rows[i].classList.contains("selected")) {
+                    table.deleteRow(i);
+                }
+            }
+        }
+
+        // Chỉ hiển thị cột đầu tiên
+        function chiHienDong() {
+            var table = document.getElementById("dynamicTable");
+            for (var i = 0; i < table.rows.length; i++) {
+                var cells = table.rows[i].cells;
+                if (cells.length > 1) {
+                    cells[1].style.display = "none";
+                }
+            }
+        }
+
+        // Hiển thị lại tất cả các cột
+        function chiHienCot() {
+            var table = document.getElementById("dynamicTable");
+            for (var i = 0; i < table.rows.length; i++) {
+                var cells = table.rows[i].cells;
+                for (var j = 0; j < cells.length; j++) {
+                    cells[j].style.display = "";
+                }
+            }
+        }
+
+        // Mở một trang mới
+        function moTrangMoi() {
+            window.open("https://tranduythanh.com", "_blank");
+        }
+
+        // Khởi tạo
+        window.onload = function () {
+            // Cập nhật đồng hồ mỗi giây
+            updateClock();
+            setInterval(updateClock, 1000);
+
+            // Gắn sự kiện click trái/phải cho dòng thông báo
+            var clickLine = document.getElementById("clickLine");
+            clickLine.onmousedown = handleMouseClick;
+            // Ngăn context menu
+            clickLine.oncontextmenu = function (e) {
+                e.preventDefault();
+                return false;
+            };
+
+            // Gắn sự kiện click cho các dòng sẵn có trong table
+            var table = document.getElementById("dynamicTable");
+            for (var i = 0; i < table.rows.length; i++) {
+                table.rows[i].onclick = function () {
+                    toggleRowColor(this);
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+    <main class="panel">
+        <div id="clock">00:00:00</div>
+        <p id="clickLine">Click chuột vào dòng này. Sẽ xuất hiện thông báo phím bấm của chuột</p>
+
+        <table id="dynamicTable" border="1">
+            <tr>
+                <td>Thêm dòng mới ở đây</td>
+                <td>Thêm dòng mới ở đây</td>
+            </tr>
+            <tr>
+                <td>Thêm dòng mới ở đây</td>
+                <td>Thêm dòng mới ở đây</td>
+            </tr>
+            <tr>
+                <td>Thêm dòng mới ở đây</td>
+                <td>Thêm dòng mới ở đây</td>
+            </tr>
+            <tr>
+                <td>Dòng 1 cột 1</td>
+                <td>Dòng 1 cột 2</td>
+            </tr>
+            <tr>
+                <td>Dòng 2 cột 1</td>
+                <td>Dòng 2 cột 2</td>
+            </tr>
+            <tr>
+                <td>Dòng 3 cột 1</td>
+                <td>Dòng 3 cột 2</td>
+            </tr>
+        </table>
+
+        <div class="btn-group">
+            <button onclick="themVao()">Thêm vào</button>
+            <button onclick="xoa()">Xóa</button>
+            <button onclick="chiHienDong()">Chỉ hiện dòng</button>
+            <button onclick="chiHienCot()">Chỉ hiện cột</button>
+            <button onclick="moTrangMoi()">Mở một trang mới</button>
+        </div>
+    </main>
+</body>
+</html>
